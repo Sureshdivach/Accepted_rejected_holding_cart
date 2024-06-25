@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="style.css">
+
+</head>
+
+<body>
+    <div id="main_container">
+        <nav>
+            <div class="imglogo">
+                <img src="https://media.istockphoto.com/id/2068745187/photo/baseball-ball-with-blank-ribbon.jpg?s=612x612&w=0&k=20&c=B7flOVxxQpYot4WQ7jAkQS2vLCgWDGpG4-dXTqKEDyg="
+                    alt="">
+            </div>
+            <div class="cart_link">
+                <a href="./Accepted.html" target="_blank">
+                    <li>Accept</li>
+                </a>
+                <a href="./Rejected.html" target="_blank">
+                    <li>Reject</li>
+                </a>
+                <a href="./hold.html" target="_blank">
+                    <li>Hold</li>
+                </a>
+            </div>
+        </nav>
+
+       
+        <div class="img_container">
+            <img src="https://images6.alphacoders.com/133/1338694.png"
+                alt=" img ">
+        </div>
+
+        <h2> Candidates Registration Data</h2>
+
+        <div class="child_container">
+            <div class="form_div">
+                <h2>  Registration Form</h2>
+                <form action="" id="form">
+                    <label for="name">Name:</label><br>
+                    <input type="text" name="" id="name"><br><br>
+                    <label for="email">Email:</label><br>
+                    <input type="email" name="" id="email"><br><br>
+                    <label for="">Course </label><br>
+                    <select name="" id="course">
+                        <option value="">select</option>
+                        <option value="HTML">HTML</option>
+                        <option value="CSS">CSS</option>
+                        <option value="JavaScript">JavaScript</option>
+                    </select><br><br>
+                    <div class="btn_div">
+                        <button id="submit">Submit</button>
+                    </div>
+                </form>
+            </div>
+            <div class="table_div">
+                <h2>Registered Candidates</h2>
+                <table id="table">
+                    <thead>
+                        <tr>
+                            <th>S.no</th>
+                            <th>Name</th>
+                            <th>Email</th>
+                            <th>Course</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody id="tbody"></tbody>
+                </table>
+            </div>
+        </div>
+   
+
+    <!--  FOOTER START -->
+
+    <div class="footer">
+        <div class="inner-footer">
+
+            <!--  for company name and description -->
+            <div class="footer-items">
+                <h1>SK</h1>
+                <p>Technical Core Group,<br> Police Headquarter Jaipur ,Rajasthan </p>
+            </div>
+
+            <!--  for quick links  -->
+            <div class="footer-items">
+                <h3>Quick Links</h3>
+                <div class="border1"></div> <!--for the underline -->
+                <ul>
+                    <a href="#">
+                        <li>Home</li>
+                    </a>
+                    <a href="#">
+                        <li>Search</li>
+                    </a>
+                    <a href="#">
+                        <li>Contact</li>
+                    </a>
+                    <a href="#">
+                        <li>About</li>
+                    </a>
+                </ul>
+            </div>
+
+            <!--  for some other links -->
+            <div class="footer-items">
+                <h3>Recipes</h3>
+                <div class="border1"></div> <!--for the underline -->
+                <ul>
+                    <a href="#">
+                        <li>Indian</li>
+                    </a>
+                    <a href="#">
+                        <li>Chinese</li>
+                    </a>
+                    <a href="#">
+                        <li>Mexican</li>
+                    </a>
+                    <a href="#">
+                        <li>Italian</li>
+                    </a>
+                </ul>
+            </div>
+
+            <!--  for contact us info -->
+            <div class="footer-items">
+                <h3>Contact us</h3>
+                <div class="border1"></div>
+                <ul>
+                    <li><i class="fa fa-map-marker" aria-hidden="true"></i>XYZ, abc</li>
+                    <li><i class="fa fa-phone" aria-hidden="true"></i>123456789</li>
+                    <li><i class="fa fa-envelope" aria-hidden="true"></i>xyz@gmail.com</li>
+                </ul>
+
+                <!--   for social links -->
+                <div class="social-media">
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-facebook"></i></a>
+                    <a href="#"><i class="fab fa-google-plus-square"></i></a>
+                </div>
+            </div>
+        </div>
+
+        <!--   Footer Bottom start  -->
+        <div class="footer-bottom">
+            Copyright &copy; @Suresh Kumar, Technical Core Group 2024.
+        </div>
+    </div>
+</div>
+    <!--   Footer Bottom end -->
+
+    <!--   FOOTER END -->
+
+</body>
+<script>
+    let data = JSON.parse(localStorage.getItem("user")) || []
+    let form = document.getElementById("form")
+    let table = document.getElementById("table")
+    let tbody = document.getElementById("tbody")
+    submit.addEventListener("click", getValue);
+    function getValue(e) {
+        e.preventDefault();
+        let obj = {
+            name: document.getElementById("name").value,
+            email: document.getElementById("email").value,
+            course: document.getElementById("course").value,
+        }
+        data.push(obj)
+        localStorage.setItem("user", JSON.stringify(data))
+        form.reset();
+        displayData(data)
+        // console.log(data)
+    }
+    function displayData(abc) {
+        tbody.innerHTML = ""
+        abc.forEach((item, index) => {
+            let tr = document.createElement("tr")
+            let td = document.createElement("td")
+            td.innerText = index + 1
+            let td1 = document.createElement("td")
+            td1.innerText = item.name
+            let td2 = document.createElement("td")
+            td2.innerText = item.email
+            let td3 = document.createElement("td")
+            td3.innerText = item.course
+            let td4 = document.createElement("td")
+            let Accept = document.createElement("button")
+            Accept.style.color = "white"
+            Accept.style.backgroundColor = "green"
+            Accept.innerText = "Accept"
+            Accept.addEventListener("click", () => {
+                acceptedData(item)
+               
+                alert("data successfuly Accepted")
+                deleteData(data,index)
+                displayData(data)
+            })
+
+
+            let Reject = document.createElement("button")
+            Reject.innerText = "Reject"
+            Reject.style.color = "white"
+            Reject.style.backgroundColor = "red"
+            Reject.addEventListener("click", () => {
+                rejectedData(item)
+              
+                alert("data successfuly Rejected")
+                deleteData(data,index)
+                displayData(data)
+            })
+
+
+            let hold = document.createElement("button")
+            hold.innerText = "hold"
+            hold.style.color = "white"
+            hold.style.backgroundColor = "skyblue"
+            hold.addEventListener("click", () => {
+                holdData(item)
+                deleteData(data,index)
+                alert("data successfuly hold")
+                displayData(data)
+            })
+
+
+
+            td4.append(Accept, Reject, hold)
+            tr.append(td, td1, td2, td3, td4)
+            tbody.append(tr)
+            table.append(tbody)
+        })
+    }
+    displayData(data)
+
+    // ------------------Accepted data-------------------------------//
+    function acceptedData(value) {
+        let acceptArr = JSON.parse(localStorage.getItem("accept")) || []
+        acceptArr.push(value)
+        localStorage.setItem("accept", JSON.stringify(acceptArr))
+    }
+
+
+    // --------------------Rejected Data------------------------------//
+    function rejectedData(value) {
+        let rejectArr = JSON.parse(localStorage.getItem("reject")) || []
+        rejectArr.push(value)
+        localStorage.setItem("reject", JSON.stringify(rejectArr))
+    }
+    // --------------------------delete function----------------------//
+    function deleteData(key,index){
+        data.splice(index , 1)
+        localStorage.setItem("user", JSON.stringify(key))
+
+    }
+
+    // ----------------------holded data---------------------------------//
+    function holdData(value) {
+        let holdArr = JSON.parse(localStorage.getItem("hold")) || []
+        holdArr.push(value)
+        localStorage.setItem("hold", JSON.stringify(holdArr))
+    }
+</script>
+
+</html>

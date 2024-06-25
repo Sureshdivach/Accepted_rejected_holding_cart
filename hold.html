@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="style.css">
+
+</head>
+
+<body>
+    <div id="main_container">
+        <nav>
+            <div class="imglogo">
+                <img src="https://media.istockphoto.com/id/2068745187/photo/baseball-ball-with-blank-ribbon.jpg?s=612x612&w=0&k=20&c=B7flOVxxQpYot4WQ7jAkQS2vLCgWDGpG4-dXTqKEDyg="
+                    alt="">
+            </div>
+            <div class="cart_link">
+                <a href="./cart.html">
+                    <li>Home</li>
+                </a>
+                <a href="./Accepted.html" target="_blank">
+                    <li>Accept</li>
+                </a>
+                <a href="./Rejected.html" target="_blank">
+                    <li>Reject</li>
+                </a>
+
+            </div>
+        </nav>
+       
+        <div class="img_container">
+            <img src="https://png.pngtree.com/thumb_back/fw800/background/20231002/pngtree-energetic-college-student-using-laptop-3d-rendered-illustration-image_13571922.png"
+                alt=" img ">
+        </div>
+        <h2>Candidates Hold Data</h2>
+        <div class="child_container">
+            <div class="table_div" style="margin: auto;">
+                <h2>Registered Candidates</h2>
+                <table id="table">
+                    <thead>
+                        <tr>
+                            <th>S.no</th>
+                            <th>Name</th>
+                            <th>Email</th>
+                            <th>Course</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody id="tbody"></tbody>
+                </table>
+            </div>
+        </div>
+        <!--  FOOTER START -->
+
+        <div class="footer">
+            <div class="inner-footer">
+
+                <!--  for company name and description -->
+                <div class="footer-items">
+                    <h1>SK</h1>
+                    <p>Technical Core Group,<br> Police Headquarter Jaipur ,Rajasthan </p>
+                </div>
+
+                <!--  for quick links  -->
+                <div class="footer-items">
+                    <h3>Quick Links</h3>
+                    <div class="border1"></div> <!--for the underline -->
+                    <ul>
+                        <a href="#">
+                            <li>Home</li>
+                        </a>
+                        <a href="#">
+                            <li>Search</li>
+                        </a>
+                        <a href="#">
+                            <li>Contact</li>
+                        </a>
+                        <a href="#">
+                            <li>About</li>
+                        </a>
+                    </ul>
+                </div>
+
+                <!--  for some other links -->
+                <div class="footer-items">
+                    <h3>Recipes</h3>
+                    <div class="border1"></div> <!--for the underline -->
+                    <ul>
+                        <a href="#">
+                            <li>Indian</li>
+                        </a>
+                        <a href="#">
+                            <li>Chinese</li>
+                        </a>
+                        <a href="#">
+                            <li>Mexican</li>
+                        </a>
+                        <a href="#">
+                            <li>Italian</li>
+                        </a>
+                    </ul>
+                </div>
+
+                <!--  for contact us info -->
+                <div class="footer-items">
+                    <h3>Contact us</h3>
+                    <div class="border1"></div>
+                    <ul>
+                        <li><i class="fa fa-map-marker" aria-hidden="true"></i>XYZ, abc</li>
+                        <li><i class="fa fa-phone" aria-hidden="true"></i>123456789</li>
+                        <li><i class="fa fa-envelope" aria-hidden="true"></i>xyz@gmail.com</li>
+                    </ul>
+
+                    <!--   for social links -->
+                    <div class="social-media">
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-facebook"></i></a>
+                        <a href="#"><i class="fab fa-google-plus-square"></i></a>
+                    </div>
+                </div>
+            </div>
+
+            <!--   Footer Bottom start  -->
+            <div class="footer-bottom">
+                Copyright &copy; @Suresh Kumar, Technical Core Group 2024.
+            </div>
+        </div>
+
+        <!--   Footer Bottom end -->
+
+        <!--   FOOTER END -->
+    </div>
+</body>
+
+<script>
+    let holdArr = JSON.parse(localStorage.getItem("hold")) || []
+    let table = document.getElementById("table")
+    let tbody = document.getElementById("tbody")
+    localStorage.setItem("hold", JSON.stringify(holdArr))
+
+    function displayData(abc) {
+        tbody.innerHTML = ""
+        abc.forEach((item, index) => {
+            let tr = document.createElement("tr")
+            let td = document.createElement("td")
+            td.innerText = index + 1
+            let td1 = document.createElement("td")
+            td1.innerText = item.name
+            let td2 = document.createElement("td")
+            td2.innerText = item.email
+            let td3 = document.createElement("td")
+            td3.innerText = item.course
+            let td4 = document.createElement("td")
+            let Accept = document.createElement("button")
+            Accept.innerText = "Accept"
+            Accept.style.padding = "5px"
+            Accept.style.marginRight = "10px"
+            Accept.style.borderRadius = "5px"
+            Accept.style.background = "green"
+            Accept.style.color = "white"
+            Accept.addEventListener("click", () => {
+                acceptedData(item)
+                deleteData(holdArr)
+                alert("data successfuly Accepted")
+                displayData(holdArr)
+            })
+
+
+            let Reject = document.createElement("button")
+            Reject.innerText = "Reject"
+            Reject.style.padding = "5px"
+            Reject.style.marginRight = "10px"
+            Reject.style.borderRadius = "5px"
+            Reject.style.background = "red"
+            Reject.style.color = "white"
+
+            Reject.addEventListener("click", () => {
+                rejectedData(item)
+                deleteData(holdArr)
+                alert("data successfuly Rejected")
+                displayData(holdArr)
+            })
+
+            td4.append(Accept, Reject)
+            tr.append(td, td1, td2, td3, td4)
+            tbody.append(tr)
+            table.append(tbody)
+        })
+    }
+    displayData(holdArr)
+
+    // ------------------Accepted data-------------------------------//
+    function acceptedData(value) {
+        let acceptArr = JSON.parse(localStorage.getItem("accept")) || []
+        acceptArr.push(value)
+        localStorage.setItem("accept", JSON.stringify(acceptArr))
+    }
+
+
+    // --------------------Rejected Data------------------------------//
+    function rejectedData(value) {
+        let rejectArr = JSON.parse(localStorage.getItem("reject")) || []
+        rejectArr.push(value)
+        localStorage.setItem("reject", JSON.stringify(rejectArr))
+    }
+    // --------------------------delete function----------------------//
+    function deleteData(xyz, index) {
+        // let holdArr = JSON.parse(localStorage.getItem("hold")) || []
+        holdArr.splice(index, 1)
+        localStorage.setItem("hold", JSON.stringify(xyz))
+
+    }
+
+</script>
+
+</html>
